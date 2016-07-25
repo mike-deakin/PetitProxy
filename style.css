@@ -1,0 +1,52 @@
+@page {
+  margin: 16pt;
+}
+
+.proxy-print-table {
+  border-style: dashed;
+  border-color: black;
+  border-width: 1px 0 0 1px;
+}
+
+.proxy-print-table * {
+  vertical-align: top;
+}
+
+.proxy-container {
+  page-break-inside: avoid;
+  display: inline-block;
+  border-width: 0 1px 1px 0;
+  border-style: inherit;
+  border-color: inherit;
+  font-size: 14px;
+  padding: 2px;
+  width: 5.5cm;
+  height: 4.9cm;
+  position: relative;
+}
+
+.proxy-card-text-container{
+  width: 5.5cm;
+  height: 3.2cm;
+}
+
+.proxy-title-bar, .proxy-attributes-bar {
+  /*font-size: 14px;*/
+  width: 5.5cm;
+  line-height: 20px; /*Font-size * 1.4 seems good*/
+}
+
+.proxy-title-bar *, .proxy-attributes-bar * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.proxy-mana-cost, .proxy-set{
+  float: right;
+}
+
+.proxy-power-tough {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+}
