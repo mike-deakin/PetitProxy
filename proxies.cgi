@@ -10,7 +10,7 @@ def htmlOpen():
 <head>
 <meta charset="utf-8"/>
 <title>Python Server-side test</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="proxies.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="jquery.textfill.min.js"></script>
 <script>
@@ -60,7 +60,8 @@ if __name__ == "__main__":
 		htmlOpen()
 		form = cgi.FieldStorage()
 		if len(form):
-			decklistdata = getAndParseMTGRequest(getAndParseFormData(form))
+			isExact = form.getvalue("exact")
+			decklistdata = getAndParseMTGRequest(getAndParseFormData(form), isExact)
 			print('<div class="proxy-print-table">')
 			for deckdatum in decklistdata:
 				print('<div class="proxy-container">')
@@ -78,16 +79,8 @@ if __name__ == "__main__":
 					print('<div class="proxy-power-tough">', deckdatum.loyalty, '</div>')
 				print('</div>')
 			print('</div>')
-		else:
-			print("""<form action="#" method="post" target="printme">
-<textarea class="decklist" name="decklist"></textarea>
-<input type="submit" value="Go!">
-</form>""")
 		htmlClose()
 	except:
 		cgi.print_exception()
 
-#testcard = mtgcard.where(name='Gideon, Battle-Forged').all()
-#for card in testcard:
-#	print(card.name)
 
