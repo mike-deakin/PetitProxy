@@ -6,6 +6,7 @@
   border-style: dashed;
   border-color: black;
   border-width: 1px 0 0 1px;
+  display: inline-block;
 }
 
 .proxy-print-table * {
@@ -33,7 +34,7 @@
 .proxy-title-bar, .proxy-attributes-bar {
   /*font-size: 14px;*/
   width: 5.5cm;
-  line-height: 20px; /*Font-size * 1.4 seems good*/
+  line-height: 18px;
 }
 
 .proxy-title-bar *, .proxy-attributes-bar * {

@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 import cgi
 import re
+import sys
+import codecs
 from mtgsdk import Card as mtgcard
 
 def htmlOpen():
@@ -9,7 +11,7 @@ def htmlOpen():
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Python Server-side test</title>
+<title>PetitProxy - Your Decklist Proxies</title>
 <link rel="stylesheet" href="proxies.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="jquery.textfill.min.js"></script>
@@ -27,7 +29,8 @@ def htmlClose():
 </html>""")
 
 def wrapWithQuotes(name):
-	return '"' + name + '"'
+	quoted = '"' + name + '"'
+	return re.sub(r'"+', r'"', quoted)
 
 def getAndParseFormData(form):
 	rawdata = form.getfirst("decklist", "")
@@ -48,8 +51,10 @@ def getAndParseMTGRequest(decklist, exact=True):
 		if len(aCard) > 0:
 			for i in range(0, cData[0]):
 				result.append(aCard[0])
-				if aCard[0].layout == 'double-faced':
-					bSide = mtgcard.where(name=wrapWithQuotes(aCard[0].names[1])).all()
+				if aCard[0].names and aCard[0].layout != "meld":
+				#if aCard[0].layout == 'double-faced' or aCard[0].layout == 'split':
+					bSideName = wrapWithQuotes(aCard[0].names[1] if aCard[0].names[0] == aCard[0].name else aCard[0].names[0])
+					bSide = mtgcard.where(name=bSideName).all()
 					if len(bSide) > 0:
 						result.append(bSide[0])
 	return result
@@ -57,6 +62,7 @@ def getAndParseMTGRequest(decklist, exact=True):
 #main program
 if __name__ == "__main__":
 	try:
+		sys.stdout = codecs.getwriter("utf-8")(sys.stdout.detach())
 		htmlOpen()
 		form = cgi.FieldStorage()
 		if len(form):
@@ -65,11 +71,11 @@ if __name__ == "__main__":
 			print('<div class="proxy-print-table">')
 			for deckdatum in decklistdata:
 				print('<div class="proxy-container">')
-				print('<div class="proxy-title-bal">')
+				print('<div class="proxy-title-bar">')
 				print('<div class="proxy-name">', deckdatum.name, '</div>')
-				print('<div class="proxy-mana-cost">', deckdatum.mana_cost if deckdatum.mana_cost else "N/A", '</div>')
+				print('<div class="proxy-mana-cost">', re.sub(r'[{}]', r'', deckdatum.mana_cost) if deckdatum.mana_cost else "N/A", '</div>')
 				print('</div>')
-				print('<div class"proxy-attributes-bar">')
+				print('<div class="proxy-attributes-bar">')
 				print('<div class="proxy-attributes">', deckdatum.type.replace('\u2014','-'), '</div></div>')
 				print('<div class="proxy-card-text-container">')
 				print('<span class="proxy-card-text">', deckdatum.text, '</span></div>')
