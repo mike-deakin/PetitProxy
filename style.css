@@ -1,3 +1,14 @@
+body {
+    max-width: 650px;
+    text-align: justify;
+    margin: auto;
+    padding-bottom: 50px
+}
+
+.page-header, .page-subheader, .about {
+    text-align: center;
+}
+
 .decklist-form {
     margin: auto;
     max-width: 300px;

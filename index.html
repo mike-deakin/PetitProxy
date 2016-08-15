@@ -5,10 +5,50 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<h1 class="page-header">Petit Proxy</h1>
+<h3 class="page-subheader">A light-weight MTG proxy generator for rapid deck prototyping.</h3>
 <form class="decklist-form" action="proxies.cgi" method="post" target="printme">
 <textarea class="decklist" name="decklist"></textarea>
 <label class="decklist-exact-label"><input class="decklist-exact" type="checkbox" name="exact" value="exact" checked="checked">Exact Match</label>
 <input class="decklist-submit" type="submit" value="Go!">
-</forrm>
+</form>
+<h2 class="about"> About </h2>
+<p>Proxys are for testing how a deck works, they don't have to be pretty. Save paper and ink by printing only the relevant information.</p>
+<p>These proxys are small, so depending on your printer margins you should be able to print 12-20 cards on a single A4 page. To make best use of these proxies, slot them into the front of a sleeved basic land, preferably not of a colour used in the deck.</p>
+<p>Enter your decklist above, one card per line, with the number of copies at the start (e.g. 4 Ancestral Recall). The form should accept major plain-text decklist formats ("4x", "4 - " "4" are all accepted ways of formatting multiples) and will attempt to make an exact match for a card name by default. If you choose to disable this behaviour, you can still try an exact match for a single card name by wrapping it in quotes (e.g. 2 "Mox Ruby").</p>
+<p>Entering one side of a double-faced card will add both sides. This applies to split cards too (e.g. Searching for "Turn" will add "Turn" and "Burn" as 2 proxies) but currently this is not supported for Meld cards.</p>
+<p>Here is an example of a valid deck list:</p>
+<div style="margin-left: 15px;">
+1 Kjeldoran Outpost<br>
+4 Mishra's Factory<br>
+4 - Strip Mine<br>
+4xOrder of Leitbur<br>
+4 Order of the White Shield<br>
+2 Phyrexian War Beast<br>
+4 Savannah Lions<br>
+2 Serra Angel<br>
+4 White Knight<br>
+Lodestone Bauble<br>
+1xZuran Orb<br>
+1-Land Tax<br>
+4 Disenchant<br>
+1 Reinforcements<br>
+1 Reprisal<br>
+1 Sleight of Mind<br>
+4 Swords to Plowshares<br>
+1 Armageddon<br>
+1 Balance<br>
+
+2 Arenson's Aura<br>
+1 Black Vise<br>
+4 Divine Offering<br>
+1 Energy Storm<br>
+1 Exile<br>
+1 Kjeldoran Outpost<br>
+1 Reprisal<br>
+2 Serrated Arrows<br>
+1 Sleight of Mind<br>
+1 Spirit Link<br>
+</div>
 </body>
 </html>
